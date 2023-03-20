@@ -9,18 +9,18 @@ namespace Laba6
     [TestClass]
     public class UnitTest1
     {
-        //Створюємо екземпляр EdgeDriverService, використовуючи вказаний шлях до виконуваного файлу EdgeDriver - msedgedriver.exe
-        EdgeDriverService service = EdgeDriverService.CreateDefaultService(@"D:\Code_projects\csharp\Laba6\Laba6\bin");
-        //Створюємо екземпляр EdgeOptions, за допомогою якого можливо налаштувати браузер   
+        //Г‘ГІГўГ®Г°ГѕВєГ¬Г® ГҐГЄГ§ГҐГ¬ГЇГ«ГїГ° EdgeDriverService, ГўГЁГЄГ®Г°ГЁГ±ГІГ®ГўГіГѕГ·ГЁ ГўГЄГ Г§Г Г­ГЁГ© ГёГ«ГїГµ Г¤Г® ГўГЁГЄГ®Г­ГіГўГ Г­Г®ГЈГ® ГґГ Г©Г«Гі EdgeDriver - msedgedriver.exe
+        EdgeDriverService service = EdgeDriverService.CreateDefaultService(@"D:\");
+        //Г‘ГІГўГ®Г°ГѕВєГ¬Г® ГҐГЄГ§ГҐГ¬ГЇГ«ГїГ° EdgeOptions, Г§Г  Г¤Г®ГЇГ®Г¬Г®ГЈГ®Гѕ ГїГЄГ®ГЈГ® Г¬Г®Г¦Г«ГЁГўГ® Г­Г Г«Г ГёГІГіГўГ ГІГЁ ГЎГ°Г ГіГ§ГҐГ°   
         EdgeOptions options = new EdgeOptions();
 
         [TestMethod]
         public void Log_to_site()
         {
-            //додамо опцію для запуску браузера з розширенням 1280х720 під час виконання даного методу
+            //Г¤Г®Г¤Г Г¬Г® Г®ГЇГ¶ВіГѕ Г¤Г«Гї Г§Г ГЇГіГ±ГЄГі ГЎГ°Г ГіГ§ГҐГ°Г  Г§ Г°Г®Г§ГёГЁГ°ГҐГ­Г­ГїГ¬ 1280Гµ720 ГЇВіГ¤ Г·Г Г± ГўГЁГЄГ®Г­Г Г­Г­Гї Г¤Г Г­Г®ГЈГ® Г¬ГҐГІГ®Г¤Гі
             options.AddArgument("--window-size=1280,720");
 
-            //Згенеруємо адресу директорії для зберігання даних користувача (cookies)
+            //Г‡ГЈГҐГ­ГҐГ°ГіВєГ¬Г® Г Г¤Г°ГҐГ±Гі Г¤ГЁГ°ГҐГЄГІГ®Г°ВіВї Г¤Г«Гї Г§ГЎГҐГ°ВіГЈГ Г­Г­Гї Г¤Г Г­ГЁГµ ГЄГ®Г°ГЁГ±ГІГіГўГ Г·Г  (cookies)
             string ProfileDirect = Directory.GetCurrentDirectory() + "\\MyProfile";
             if (!Directory.Exists(ProfileDirect))
             {
@@ -30,45 +30,45 @@ namespace Laba6
 
                 Directory.CreateDirectory(ProfileDirect);
             }
-            //додамо опцію яка вказує на згенеровану вище адресу даних користувача
+            //Г¤Г®Г¤Г Г¬Г® Г®ГЇГ¶ВіГѕ ГїГЄГ  ГўГЄГ Г§ГіВє Г­Г  Г§ГЈГҐГ­ГҐГ°Г®ГўГ Г­Гі ГўГЁГ№ГҐ Г Г¤Г°ГҐГ±Гі Г¤Г Г­ГЁГµ ГЄГ®Г°ГЁГ±ГІГіГўГ Г·Г 
             options.AddArgument(@"user-data-dir=" + ProfileDirect);
 
-            //Створимо новий екземпляр EdgeDriver на основі створених вище сервісу та опцій
+            //Г‘ГІГўГ®Г°ГЁГ¬Г® Г­Г®ГўГЁГ© ГҐГЄГ§ГҐГ¬ГЇГ«ГїГ° EdgeDriver Г­Г  Г®Г±Г­Г®ГўВі Г±ГІГўГ®Г°ГҐГ­ГЁГµ ГўГЁГ№ГҐ Г±ГҐГ°ГўВіГ±Гі ГІГ  Г®ГЇГ¶ВіГ©
             var driver = new EdgeDriver(service, options);
 
-            //Перейдемо на сторінку "особистий кабінет" інтернет магазину
+            //ГЏГҐГ°ГҐГ©Г¤ГҐГ¬Г® Г­Г  Г±ГІГ®Г°ВіГ­ГЄГі "Г®Г±Г®ГЎГЁГ±ГІГЁГ© ГЄГ ГЎВіГ­ГҐГІ" ВіГ­ГІГҐГ°Г­ГҐГІ Г¬Г ГЈГ Г§ГЁГ­Гі
             driver.Url = "https://memory.net.ua/customer/account/";
 
-            if (driver.Title != "Memory.Net.Ua Мій аккаунт")
+            if (driver.Title != "Memory.Net.Ua ГЊВіГ© Г ГЄГЄГ ГіГ­ГІ")
             {
-                //На завантаженій сторінці знайдемо елемент (за допомогою XPath), що відповідає за ввід емейла
+                //ГЌГ  Г§Г ГўГ Г­ГІГ Г¦ГҐГ­ВіГ© Г±ГІГ®Г°ВіГ­Г¶Ві Г§Г­Г Г©Г¤ГҐГ¬Г® ГҐГ«ГҐГ¬ГҐГ­ГІ (Г§Г  Г¤Г®ГЇГ®Г¬Г®ГЈГ®Гѕ XPath), Г№Г® ГўВіГ¤ГЇГ®ГўВіГ¤Г Вє Г§Г  ГўГўВіГ¤ ГҐГ¬ГҐГ©Г«Г 
                 IWebElement email = driver.FindElement(By.XPath("//*[@id=\"email\"]"));
-                //Введемо в знайдений елемент електронну пошту (за допомогою функції відправки клавіш)
+                //Г‚ГўГҐГ¤ГҐГ¬Г® Гў Г§Г­Г Г©Г¤ГҐГ­ГЁГ© ГҐГ«ГҐГ¬ГҐГ­ГІ ГҐГ«ГҐГЄГІГ°Г®Г­Г­Гі ГЇГ®ГёГІГі (Г§Г  Г¤Г®ГЇГ®Г¬Г®ГЈГ®Гѕ ГґГіГ­ГЄГ¶ВіВї ГўВіГ¤ГЇГ°Г ГўГЄГЁ ГЄГ«Г ГўВіГё)
                 email.SendKeys("mkqodopsefyzsbvpoz@tcwlx.com");
-                //Знайдемо елемент, що відповідає за ввід пароля
+                //Г‡Г­Г Г©Г¤ГҐГ¬Г® ГҐГ«ГҐГ¬ГҐГ­ГІ, Г№Г® ГўВіГ¤ГЇГ®ГўВіГ¤Г Вє Г§Г  ГўГўВіГ¤ ГЇГ Г°Г®Г«Гї
                 IWebElement password = driver.FindElement(By.XPath("//*[@id=\"pass\"]"));
-                //Введемо пароль
+                //Г‚ГўГҐГ¤ГҐГ¬Г® ГЇГ Г°Г®Г«Гј
                 password.SendKeys("mkqodopsefyzsbvpoz");
 
-                //Гугл-капча знаходиться в окремому вікні (сайт-в-сайті), знайдемо це вікно
+                //ГѓГіГЈГ«-ГЄГ ГЇГ·Г  Г§Г­Г ГµГ®Г¤ГЁГІГјГ±Гї Гў Г®ГЄГ°ГҐГ¬Г®Г¬Гі ГўВіГЄГ­Ві (Г±Г Г©ГІ-Гў-Г±Г Г©ГІВі), Г§Г­Г Г©Г¤ГҐГ¬Г® Г¶ГҐ ГўВіГЄГ­Г®
                 var capcha = driver.FindElement(By.XPath("//iframe[starts-with(@name, 'a-') and starts-with(@src, 'https://www.google.com/recaptcha')]"));
-                //Підтвердимо, що ми не робот проставивши галочку
+                //ГЏВіГ¤ГІГўГҐГ°Г¤ГЁГ¬Г®, Г№Г® Г¬ГЁ Г­ГҐ Г°Г®ГЎГ®ГІ ГЇГ°Г®Г±ГІГ ГўГЁГўГёГЁ ГЈГ Г«Г®Г·ГЄГі
                 capcha.Click();
-                //Чекаємо наприклад 2 секунди, щоб перевірка на роботів встигла завершитись
+                //Г—ГҐГЄГ ВєГ¬Г® Г­Г ГЇГ°ГЁГЄГ«Г Г¤ 2 Г±ГҐГЄГіГ­Г¤ГЁ, Г№Г®ГЎ ГЇГҐГ°ГҐГўВіГ°ГЄГ  Г­Г  Г°Г®ГЎГ®ГІВіГў ГўГ±ГІГЁГЈГ«Г  Г§Г ГўГҐГ°ГёГЁГІГЁГ±Гј
                 Thread.Sleep(2000);
 
-                //Для пошуку елементів на ній потрібно перемкнемось на відповідний Frame
+                //Г„Г«Гї ГЇГ®ГёГіГЄГі ГҐГ«ГҐГ¬ГҐГ­ГІВіГў Г­Г  Г­ВіГ© ГЇГ®ГІГ°ВіГЎГ­Г® ГЇГҐГ°ГҐГ¬ГЄГ­ГҐГ¬Г®Г±Гј Г­Г  ГўВіГ¤ГЇГ®ГўВіГ¤Г­ГЁГ© Frame
                 driver.SwitchTo().Frame(capcha);
-                //Знайдемо у фреймі елемент що відповідає за "відображення" галочки
+                //Г‡Г­Г Г©Г¤ГҐГ¬Г® Гі ГґГ°ГҐГ©Г¬Ві ГҐГ«ГҐГ¬ГҐГ­ГІ Г№Г® ГўВіГ¤ГЇГ®ГўВіГ¤Г Вє Г§Г  "ГўВіГ¤Г®ГЎГ°Г Г¦ГҐГ­Г­Гї" ГЈГ Г«Г®Г·ГЄГЁ
                 var capchaCheckBox = driver.FindElement(By.Id("recaptcha-anchor"));
-                //Перемкнемось до контенту за замовчуванням (з фрейму гугл-капчі до нашої html сторінки)
+                //ГЏГҐГ°ГҐГ¬ГЄГ­ГҐГ¬Г®Г±Гј Г¤Г® ГЄГ®Г­ГІГҐГ­ГІГі Г§Г  Г§Г Г¬Г®ГўГ·ГіГўГ Г­Г­ГїГ¬ (Г§ ГґГ°ГҐГ©Г¬Гі ГЈГіГЈГ«-ГЄГ ГЇГ·Ві Г¤Г® Г­Г ГёГ®Вї html Г±ГІГ®Г°ВіГ­ГЄГЁ)
                 driver.SwitchTo().DefaultContent();
 
                 Thread.Sleep(8000);
 
-                //Знайдемо вебелемент - кнопку "Вхід"
+                //Г‡Г­Г Г©Г¤ГҐГ¬Г® ГўГҐГЎГҐГ«ГҐГ¬ГҐГ­ГІ - ГЄГ­Г®ГЇГЄГі "Г‚ГµВіГ¤"
                 IWebElement enter = driver.FindElement(By.XPath("//*[@id=\"send2\"]"));
-                //Натиснемо кнопку "Вхід"
+                //ГЌГ ГІГЁГ±Г­ГҐГ¬Г® ГЄГ­Г®ГЇГЄГі "Г‚ГµВіГ¤"
                 enter.Click();
             }
             driver.Quit();
@@ -77,23 +77,23 @@ namespace Laba6
         [TestMethod]
         public void Search_item()
         {
-            //додамо опцію для запуску браузера з розширенням 1280х720 під час виконання даного методу
+            //Г¤Г®Г¤Г Г¬Г® Г®ГЇГ¶ВіГѕ Г¤Г«Гї Г§Г ГЇГіГ±ГЄГі ГЎГ°Г ГіГ§ГҐГ°Г  Г§ Г°Г®Г§ГёГЁГ°ГҐГ­Г­ГїГ¬ 1280Гµ720 ГЇВіГ¤ Г·Г Г± ГўГЁГЄГ®Г­Г Г­Г­Гї Г¤Г Г­Г®ГЈГ® Г¬ГҐГІГ®Г¤Гі
             options.AddArgument("--window-size=1280,720");
-            //Створюємо і вказуємо адресу директорії для зберігання даних користувача (cookies)
+            //Г‘ГІГўГ®Г°ГѕВєГ¬Г® Ві ГўГЄГ Г§ГіВєГ¬Г® Г Г¤Г°ГҐГ±Гі Г¤ГЁГ°ГҐГЄГІГ®Г°ВіВї Г¤Г«Гї Г§ГЎГҐГ°ВіГЈГ Г­Г­Гї Г¤Г Г­ГЁГµ ГЄГ®Г°ГЁГ±ГІГіГўГ Г·Г  (cookies)
             string ProfileDirect = Directory.GetCurrentDirectory() + "\\MyProfile";
             options.AddArgument(@"user-data-dir=" + ProfileDirect);
 
-            //Створимо новий екземпляр EdgeDriver
+            //Г‘ГІГўГ®Г°ГЁГ¬Г® Г­Г®ГўГЁГ© ГҐГЄГ§ГҐГ¬ГЇГ«ГїГ° EdgeDriver
             var driver = new EdgeDriver(service, options);
-            //Перейдемо на сторінку особистого кабінету
+            //ГЏГҐГ°ГҐГ©Г¤ГҐГ¬Г® Г­Г  Г±ГІГ®Г°ВіГ­ГЄГі Г®Г±Г®ГЎГЁГ±ГІГ®ГЈГ® ГЄГ ГЎВіГ­ГҐГІГі
             driver.Url = "https://memory.net.ua/customer/account/";
 
-            //Знайдемо вебелемент - кнопку "search"
+            //Г‡Г­Г Г©Г¤ГҐГ¬Г® ГўГҐГЎГҐГ«ГҐГ¬ГҐГ­ГІ - ГЄГ­Г®ГЇГЄГі "search"
             IWebElement search = driver.FindElement(By.XPath("//*[@id=\"search\"]"));
-            //Введемо search
+            //Г‚ГўГҐГ¤ГҐГ¬Г® search
             search.SendKeys("Fury 16");
 
-            //Знайдемо вебелемент - кнопку "search_press"
+            //Г‡Г­Г Г©Г¤ГҐГ¬Г® ГўГҐГЎГҐГ«ГҐГ¬ГҐГ­ГІ - ГЄГ­Г®ГЇГЄГі "search_press"
             IWebElement search_press = driver.FindElement(By.XPath("//*[@id=\"top\"]/body/div/div/header/div/div[5]/form/div[1]/button"));
             search_press.Click();
             driver.Quit();
@@ -102,27 +102,27 @@ namespace Laba6
         [TestMethod]
         public void add_to_wishlist()
         {
-            //додамо опцію для запуску браузера з розширенням 1280х720 під час виконання даного методу
+            //Г¤Г®Г¤Г Г¬Г® Г®ГЇГ¶ВіГѕ Г¤Г«Гї Г§Г ГЇГіГ±ГЄГі ГЎГ°Г ГіГ§ГҐГ°Г  Г§ Г°Г®Г§ГёГЁГ°ГҐГ­Г­ГїГ¬ 1280Гµ720 ГЇВіГ¤ Г·Г Г± ГўГЁГЄГ®Г­Г Г­Г­Гї Г¤Г Г­Г®ГЈГ® Г¬ГҐГІГ®Г¤Гі
             options.AddArgument("--window-size=1280,720");
-            //Створюємо і вказуємо адресу директорії для зберігання даних користувача (cookies)
+            //Г‘ГІГўГ®Г°ГѕВєГ¬Г® Ві ГўГЄГ Г§ГіВєГ¬Г® Г Г¤Г°ГҐГ±Гі Г¤ГЁГ°ГҐГЄГІГ®Г°ВіВї Г¤Г«Гї Г§ГЎГҐГ°ВіГЈГ Г­Г­Гї Г¤Г Г­ГЁГµ ГЄГ®Г°ГЁГ±ГІГіГўГ Г·Г  (cookies)
             string ProfileDirect = Directory.GetCurrentDirectory() + "\\MyProfile";
             options.AddArgument(@"user-data-dir=" + ProfileDirect);
 
-            //Створимо новий екземпляр EdgeDriver
+            //Г‘ГІГўГ®Г°ГЁГ¬Г® Г­Г®ГўГЁГ© ГҐГЄГ§ГҐГ¬ГЇГ«ГїГ° EdgeDriver
             var driver = new EdgeDriver(service, options);
-            //Перейдемо на сторінку особистого кабінету
+            //ГЏГҐГ°ГҐГ©Г¤ГҐГ¬Г® Г­Г  Г±ГІГ®Г°ВіГ­ГЄГі Г®Г±Г®ГЎГЁГ±ГІГ®ГЈГ® ГЄГ ГЎВіГ­ГҐГІГі
             driver.Url = "https://memory.net.ua/customer/account/";
 
-            //Знайдемо вебелемент - кнопку "search"
+            //Г‡Г­Г Г©Г¤ГҐГ¬Г® ГўГҐГЎГҐГ«ГҐГ¬ГҐГ­ГІ - ГЄГ­Г®ГЇГЄГі "search"
             IWebElement search = driver.FindElement(By.XPath("//*[@id=\"search\"]"));
-            //Введемо search
+            //Г‚ГўГҐГ¤ГҐГ¬Г® search
             search.SendKeys("Fury 16");
 
-            //Знайдемо вебелемент - кнопку "search_press"
+            //Г‡Г­Г Г©Г¤ГҐГ¬Г® ГўГҐГЎГҐГ«ГҐГ¬ГҐГ­ГІ - ГЄГ­Г®ГЇГЄГі "search_press"
             IWebElement search_press = driver.FindElement(By.XPath("//*[@id=\"top\"]/body/div/div/header/div/div[5]/form/div[1]/button"));
             search_press.Click();
 
-            //Знайдемо вебелемент - кнопку "add_to_wishlist"
+            //Г‡Г­Г Г©Г¤ГҐГ¬Г® ГўГҐГЎГҐГ«ГҐГ¬ГҐГ­ГІ - ГЄГ­Г®ГЇГЄГі "add_to_wishlist"
             IWebElement add_to_wishlist = driver.FindElement(By.XPath("//*[@id=\"top\"]/body/div/div/div[2]/div/div[2]/div[2]/div[4]/div/ul/li[1]/div/div[2]/ul/li[1]/a"));
             add_to_wishlist.Click();
             Thread.Sleep(15000);
